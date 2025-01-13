@@ -14,7 +14,3 @@ pub fn register_strategy(strategy: Box<dyn Strategy>) {
 pub fn get_strategies() -> Vec<Box<dyn Strategy>> {
     STRATEGIES.lock().unwrap().clone()
 }
-
-pub trait StrategyRegistration {
-    fn register();
-}
