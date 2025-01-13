@@ -1,18 +1,20 @@
 [package]
-    name = "prisoners-dilemma"
-    version = "0.1.0"
-    edition = "2021"
+name = "prisoners-dilemma"
+version = "0.1.0"
+edition = "2021"
+build = "build.rs" # Our build script.
 
-    [lib]
-    crate-type = ["cdylib", "rlib"]
+[lib]
+crate-type = ["cdylib", "rlib"]
 
-    [dependencies]
-    wasm-bindgen = "0.2"
-    serde = { version = "1.0", features = ["derive"] }
-    serde_json = "1.0"
-    rand = { version = "0.8", features = ["std_rng"] } # For thread-safe RNG
-    getrandom = { version = "0.2", features = ["js"] }
-    
-    [profile.release]
-    lto = true
-    opt-level = "z"
+[dependencies]
+wasm-bindgen = "0.2"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+rand = { version = "0.8", features = ["std_rng"] } # For thread-safe RNG
+getrandom = { version = "0.2", features = ["js"] }
+lazy_static = "1.4.0"  # For lazy initialization of static variables
+
+[profile.release]
+lto = true
+opt-level = "z"

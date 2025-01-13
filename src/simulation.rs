@@ -1,14 +1,7 @@
+// src/simulation.rs
 use std::collections::HashMap;
 use serde::{Serialize, Deserialize};
-
-// Import the strategies module and its contents
-use crate::strategies::{
-    tit_for_tat::TitForTat,
-    always_cooperate::AlwaysCooperate,
-    always_defect::AlwaysDefect,
-    random::Random,
-    delayed_tit_for_tat::DelayedTitForTat,
-};
+use crate::strategies::{registry::get_strategies, register_strategies};
 
 #[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct StrategyResult {
@@ -17,17 +10,14 @@ pub struct StrategyResult {
 }
 
 pub fn run_simulation() -> Vec<StrategyResult> {
-    // Create a vector of boxed strategies
-    let strategies: Vec<Box<dyn Strategy>> = vec![
-        Box::new(TitForTat::new()),
-        Box::new(AlwaysCooperate::new()),
-        Box::new(AlwaysDefect::new()),
-        Box::new(Random::new()),
-        Box::new(DelayedTitForTat::new()),
-    ];
+    // Register all strategies
+    register_strategies();
+
+    // Fetch all registered strategies
+    let strategies = get_strategies();
 
     let mut scores: HashMap<String, i32> = HashMap::new();
-    let num_rounds = 100;
+    let num_rounds = 10000;
 
     // Run the simulation for each pair of strategies
     for (i, strategy1) in strategies.iter().enumerate() {

@@ -1,5 +1,5 @@
+#![allow(non_snake_case)]
 use wasm_bindgen::prelude::*;
-use serde::{Serialize, Deserialize};
 use serde_json;
 
 // Declare the `strategies` module
